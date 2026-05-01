@@ -1,3 +1,3 @@
-# apps
-This module is part of the Car Service AI...
+# services
+This module is part of the Car Service AI OS.
 Created by: Toni Jukka
