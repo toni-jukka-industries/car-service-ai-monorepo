@@ -1,0 +1,17 @@
+[project]
+name = "car-service-ai"
+version = "1.0.0"
+description = "AI services for Car Service AI OS"
+authors = [{ name = "Toni Jukka" }]
+
+[tool.poetry]
+packages = [{ include = "services" }]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.110.0"
+uvicorn = "^0.29.0"
+pydantic = "^2.6.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.0.0"
