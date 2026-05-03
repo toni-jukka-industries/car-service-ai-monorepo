@@ -1,12 +1,12 @@
 # AI Gateway
 
-Handles AI requests.
+Main entry point for AI requests.
 
 Endpoints:
 - GET /
 - POST /ask
 
-This will connect to:
-- RAG engine
-- AI models
-- diagnostics system
+Handles:
+- diagnostics AI
+- repair suggestions
+- future integrations (RAG, models)
