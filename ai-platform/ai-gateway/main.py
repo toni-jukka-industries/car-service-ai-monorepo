@@ -1,25 +1,30 @@
 from fastapi import FastAPI
+
 from pydantic import BaseModel
 
-app = FastAPI(title="Car Service AI Gateway")
+app = FastAPI()
 
 class AIRequest(BaseModel):
     message: str
 
-@app.get("/")
-def root():
-    return {"status": "AI Gateway running"}
 
 @app.post("/ask")
 def ask_ai(request: AIRequest):
     user_message = request.message
-
-    if "vika" in user_message.lower():
-        response = "Mahdollinen vika: tarkista moottorin vikakoodit."
-    else:
-        response = "Analysoidaan tilanne..."
-
+    
+    try:
+        # Lähetetään viesti paikalliselle diagnoosipalvelulle (portti 8001)
+        response = requests.post(
+            "http://localhost:8001/diagnose",
+            json={"issue": user_message}
+        )
+        # Haetaan vastaus JSON-muodossa
+        diagnosis = response.json().get("diagnosis")
+    except Exception:
+        # Jos yhteys epäonnistuu, palautetaan virheilmoitus
+        diagnosis = "Diagnostic service ei vastaa"
+        
     return {
         "input": user_message,
-        "response": response
+        "diagnosis": diagnosis
     }
